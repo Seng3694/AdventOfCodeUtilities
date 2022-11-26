@@ -18,7 +18,7 @@ func TestIsHexChar(t *testing.T) {
 		})
 	}
 
-	someInvalidHexChars := "ghijklmnopqrstuvwxyz /?!-+"
+	someInvalidHexChars := "ghijklmnopqrstuvwxyz /?!-+#"
 	for _, c := range someInvalidHexChars {
 		name := fmt.Sprintf("%v", c)
 		t.Run(name, func(t *testing.T) {
