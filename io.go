@@ -13,25 +13,17 @@ func FileReadAll[T string | []byte](path string) T {
 	return T(data)
 }
 
-func FileReadAllLines(path string) <-chan string {
+func FileReadAllLines(path string, f func(string)) {
 	file, err := os.Open(path)
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
 
-	ch := make(chan string)
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
 
-	go func() {
-		defer file.Close()
-		defer close(ch)
-
-		scanner := bufio.NewScanner(file)
-		scanner.Split(bufio.ScanLines)
-
-		for scanner.Scan() {
-			ch <- scanner.Text()
-		}
-	}()
-
-	return ch
+	for scanner.Scan() {
+		f(scanner.Text())
+	}
 }
