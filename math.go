@@ -2,6 +2,22 @@ package aocutil
 
 import "golang.org/x/exp/constraints"
 
+func Min[T constraints.Ordered](left, right T) T {
+	if left < right {
+		return left
+	} else {
+		return right
+	}
+}
+
+func Max[T constraints.Ordered](left, right T) T {
+	if left > right {
+		return left
+	} else {
+		return right
+	}
+}
+
 func Clamp[T constraints.Ordered](value, lower, upper T) T {
 	if value < lower {
 		return lower

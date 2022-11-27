@@ -5,6 +5,52 @@ import (
 	"testing"
 )
 
+func TestMin(t *testing.T) {
+	tests := []struct {
+		left, right, expected int
+	}{
+		{1, 2, 1},
+		{2, 1, 1},
+		{-1, -2, -2},
+		{-2, -1, -2},
+		{-2, 2, -2},
+		{2, -2, -2},
+	}
+
+	for _, test := range tests {
+		name := fmt.Sprintf("%v,%v", test.left, test.right)
+		t.Run(name, func(t *testing.T) {
+			actual := Min(test.left, test.right)
+			if actual != test.expected {
+				t.Errorf("got %v, expected %v", actual, test.expected)
+			}
+		})
+	}
+}
+
+func TestMax(t *testing.T) {
+	tests := []struct {
+		left, right, expected int
+	}{
+		{1, 2, 2},
+		{2, 1, 2},
+		{-1, -2, -1},
+		{-2, -1, -1},
+		{-2, 2, 2},
+		{2, -2, 2},
+	}
+
+	for _, test := range tests {
+		name := fmt.Sprintf("%v,%v", test.left, test.right)
+		t.Run(name, func(t *testing.T) {
+			actual := Max(test.left, test.right)
+			if actual != test.expected {
+				t.Errorf("got %v, expected %v", actual, test.expected)
+			}
+		})
+	}
+}
+
 func TestClamp(t *testing.T) {
 	tests := []struct {
 		value, lower, upper, expected int32
