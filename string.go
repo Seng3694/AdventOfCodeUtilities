@@ -1,5 +1,7 @@
 package aocutil
 
+import "strconv"
+
 func IsHexChar[T byte | rune](c T) bool {
 	return (c >= '0' && c <= '9') ||
 		(c >= 'A' && c <= 'F') ||
@@ -13,4 +15,12 @@ func IsHexString(s string) bool {
 		}
 	}
 	return true
+}
+
+func Atoi(str string) int {
+	value, e := strconv.Atoi(str)
+	if e != nil {
+		panic(e)
+	}
+	return value
 }
